@@ -9,7 +9,7 @@
 
         <div class="Card" v-if="opened">
             <h1>{{ card.name }}</h1>
-            <img :src="cardImage">
+            <img :src="cardImage" class="CardImage">
         </div>
     </div>
 </template>
@@ -18,12 +18,6 @@
 import store from "$/store.js";
 
 export default {
-    data() {
-        return {
-            opened: false
-        }
-    },
-
     computed: {
         card() {
             return store.card;
@@ -31,6 +25,10 @@ export default {
 
         cardImage() {
             return "/cards/" + store.currentCategory.name + "/" + this.card.image;
+        },
+        
+        opened() {
+            return store.game.opened;
         }
     },
 
@@ -50,7 +48,7 @@ export default {
         },
 
         openCard() {
-            this.opened = true;
+            store.game.opened = true;
 
             if (store.game.audio) {
                 store.game.audio.pause();
@@ -67,3 +65,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.CardImage {
+    object-fit: contain;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+</style>

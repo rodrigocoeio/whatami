@@ -4,7 +4,8 @@ export default {
   game: {
     started: false,
     category: "all",
-    cardIndex: 0
+    cardIndex: 0,
+    opened: false
   },
 
   configs: {

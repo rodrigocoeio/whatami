@@ -23,7 +23,7 @@
                     </li>
 
                     <!-- Previous Card -->
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <button id="previousCardButton" class="btn btn-warning" :disabled="cardIndex == 0"
                             @click="previousCard">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -33,15 +33,15 @@
                             </svg>
                             Previous Card
                         </button>
-                    </li> -->
+                    </li>
 
-                    <!-- <li class="CardIndex nav-item">
+                    <li class="CardIndex nav-item">
                         &nbsp;&nbsp;
                         {{ cardsNumber > 0 ? cardIndex + 1 : 0 }} / {{ cardsNumber }}
-                    </li> -->
+                    </li>
 
                     <!-- Next Card -->
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <button id="nextCardButton" class="btn btn-success" :disabled="((cardIndex + 1) >= cardsNumber)"
                             @click.stop.prevent="nextCard">
                             Next Card
@@ -51,7 +51,7 @@
                                     d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                             </svg>
                         </button>
-                    </li> -->
+                    </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -94,6 +94,14 @@ export default {
 
         configs() {
             return store.configs;
+        },
+
+        cardIndex() {
+            return store.game.cardIndex;
+        },
+
+        cardsNumber() {
+            return store.cardsNumber;
         }
     },
 
