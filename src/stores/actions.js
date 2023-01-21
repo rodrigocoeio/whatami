@@ -1,6 +1,17 @@
 export default {
   startGame() {
+    if (
+      !this.currentCategory ||
+      !this.currentCategory.cards ||
+      this.currentCategory.cards.length === 0
+    ) {
+      alert("Choose a Category or Subcategory");
+      $("#categoryField").trigger("focus");
+      return false;
+    }
+
     this.game.started = true;
+    this.game.opened = false;
     this.game.cardIndex = 0;
 
     playAudio("/audios/whatami.mp3");
@@ -8,11 +19,23 @@ export default {
 
   quitGame() {
     this.game.started = false;
+    this.game.category = false;
   },
 
   selectCategory(category) {
-    category.cards = shuffleArray(category.cards);
-    this.game.category = category;
+    if (category && category.cards) {
+      switch (this.game.cardSorting) {
+        case "alpha":
+          category.cards = sortByKey(category.cards, "name", "asc");
+          break;
+
+        case "shuffle":
+          category.cards = shuffleArray(category.cards);
+          break;
+      }
+
+      this.game.category = category;
+    }
   },
 
   nextCard() {
@@ -49,8 +72,7 @@ export default {
       this.game.audio = false;
     }
 
-    if(!this.card.audio)
-      return false;
+    if (!this.card.audio) return false;
 
     const store = this;
     const audioFile =

@@ -3,9 +3,10 @@ import categories from "$/categories.js";
 export default {
   game: {
     started: false,
-    category: "all",
+    category: false,
     cardIndex: 0,
-    opened: false
+    opened: false,
+    cardSorting: "alpha",
   },
 
   configs: {

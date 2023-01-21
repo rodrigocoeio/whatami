@@ -4,6 +4,11 @@
 
     <br><br>
 
+    <select class="form form-select" v-model="cardSorting">
+      <option value="alpha">Alphabetical Sorting</option>
+      <option value="shuffle">Shuffle Cards</option>
+    </select>
+
     <category-select :categories="categories"></category-select>
 
     <button class="btn btn-primary" @click="startGame">Start Game</button>
@@ -18,7 +23,7 @@ import CategorySelect from "./CategorySelect.vue";
 export default {
   data() {
     return {
-
+      cardSorting: store.game.cardSorting
     }
   },
 

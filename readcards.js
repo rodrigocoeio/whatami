@@ -81,7 +81,6 @@ const readCategories = async function (folder, callback) {
   callback(categoriesCards.categories);
 };
 
-
 const readContents = (contents, parent) => {
   let cover = false;
   let categories = {};
@@ -156,7 +155,7 @@ const getCard = (content, parent) => {
       parent: content.parent,
       image: cardImage,
       audio: cardAudio,
-      tips: cardTips
+      tips: cardTips,
     };
   }
 
@@ -167,15 +166,12 @@ const getCardTips = (content, parent) => {
   const tips = [];
   let tipNumber = 1;
 
-  while(true)
-  {
-    const tip = findCardFile(content.name + '-' + tipNumber, parent, "mp3");
+  while (true) {
+    const tip = findCardFile(content.name + "-" + tipNumber, parent, "mp3");
     tipNumber++;
 
-    if(tip)
-      tips.push(tip)
-    else
-      break;
+    if (tip) tips.push(tip);
+    else break;
   }
 
   return tips;

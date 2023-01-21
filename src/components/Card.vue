@@ -1,10 +1,13 @@
 <template>
     <div class="CardBox">
-        <button class="btn btn-success" v-for="tip, index in card.tips" @click="playTip(tip)">
+        <button :class="['TipButton', 'btn', tipsPlayed[tip] ? 'btn-primary' : 'btn-success']"
+            v-for="tip, index in card.tips" @click="playTip(tip)">
             Tip {{ index + 1 }}
             <img src="/images/audio.png" height="36">
         </button>
+
         <hr>
+
         <img src="/images/whatami-cover.png" class="CardCover" @click="openCard" v-if="!opened">
 
         <div class="Card" v-if="opened" @click="playCard">
@@ -18,6 +21,12 @@
 import store from "$/store.js";
 
 export default {
+    data() {
+        return {
+            tipsPlayed: {}
+        }
+    },
+
     computed: {
         card() {
             return store.card;
@@ -26,9 +35,15 @@ export default {
         cardImage() {
             return "/cards/" + store.currentCategory.name + "/" + this.card.image;
         },
-        
+
         opened() {
             return store.game.opened;
+        }
+    },
+
+    watch: {
+        card(newCard) {
+            this.tipsPlayed = {}
         }
     },
 
@@ -39,11 +54,13 @@ export default {
                 store.game.audio = false;
             }
 
+            const Card = this;
             const audioFile = "/cards/" + store.currentCategory.name + "/" + tip;
 
             store.game.audio = playAudio(audioFile);
             store.game.audio.onended = function () {
                 store.game.audio = false;
+                Card.tipsPlayed[tip] = true;
             };
         },
 
@@ -62,17 +79,24 @@ export default {
 .CardBox {
     height: calc(100% - 100px);
 }
+
 .Card {
     height: calc(100% - 150px);
     cursor: pointer;
 }
+
 .CardCover {
     cursor: pointer;
 }
+
 .CardImage {
     object-fit: contain;
     height: 100%;
     margin: auto;
     overflow: hidden;
+}
+
+.TipButton {
+    margin-right: 5px;
 }
 </style>
