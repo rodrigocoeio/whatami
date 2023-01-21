@@ -5,9 +5,9 @@
             <img src="/images/audio.png" height="36">
         </button>
         <hr>
-        <img src="/images/whatami-cover.png" @click="openCard" v-if="!opened">
+        <img src="/images/whatami-cover.png" class="CardCover" @click="openCard" v-if="!opened">
 
-        <div class="Card" v-if="opened">
+        <div class="Card" v-if="opened" @click="playCard">
             <h1>{{ card.name }}</h1>
             <img :src="cardImage" class="CardImage">
         </div>
@@ -48,25 +48,27 @@ export default {
         },
 
         openCard() {
-            store.game.opened = true;
+            return store.openCard();
+        },
 
-            if (store.game.audio) {
-                store.game.audio.pause();
-                store.game.audio = false;
-            }
-
-            const audioFile = "/cards/" + store.currentCategory.name + "/" + this.card.audio;
-
-            store.game.audio = playAudio(audioFile);
-            store.game.audio.onended = function () {
-                store.game.audio = false;
-            };
+        playCard() {
+            return store.playCard();
         }
     }
 }
 </script>
 
 <style scoped>
+.CardBox {
+    height: calc(100% - 100px);
+}
+.Card {
+    height: calc(100% - 150px);
+    cursor: pointer;
+}
+.CardCover {
+    cursor: pointer;
+}
 .CardImage {
     object-fit: contain;
     height: 100%;
