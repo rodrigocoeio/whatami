@@ -7,6 +7,7 @@ export default {
     cardIndex: 0,
     opened: false,
     cardSorting: "alpha",
+    tipsPlayed: {}
   },
 
   configs: {

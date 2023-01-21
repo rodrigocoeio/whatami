@@ -13,6 +13,7 @@ export default {
     this.game.started = true;
     this.game.opened = false;
     this.game.cardIndex = 0;
+    this.game.tipsPlayed = {};
 
     playAudio("/audios/whatami.mp3");
   },
@@ -44,6 +45,7 @@ export default {
 
       this.game.cardIndex++;
       this.game.opened = false;
+      this.game.tipsPlayed = {};
 
       playAudio("/audios/whatami.mp3");
     }
@@ -55,8 +57,41 @@ export default {
 
       this.game.cardIndex--;
       this.game.opened = false;
+      this.game.tipsPlayed = {};
 
       playAudio("/audios/whatami.mp3");
+    }
+  },
+
+  playTip(tip) {
+    if (this.game.audio) {
+      this.game.audio.pause();
+      this.game.audio = false;
+    }
+
+    const store = this;
+    const audioFile = "/cards/" + this.currentCategory.name + "/" + tip;
+
+    this.game.audio = playAudio(audioFile);
+    this.game.audio.onended = function () {
+      store.game.audio = false;
+      store.game.tipsPlayed[tip] = true;
+    };
+  },
+
+  playNextTip() {
+    const card = this.card;
+    const store = this;
+
+    if (card) {
+      card.tips.every((tip) => {
+        if (!this.game.tipsPlayed[tip]) {
+          store.playTip(tip);
+          return false;
+        }
+
+        return true;
+      });
     }
   },
 

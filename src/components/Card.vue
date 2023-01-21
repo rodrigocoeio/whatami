@@ -21,12 +21,6 @@
 import store from "$/store.js";
 
 export default {
-    data() {
-        return {
-            tipsPlayed: {}
-        }
-    },
-
     computed: {
         card() {
             return store.card;
@@ -36,32 +30,18 @@ export default {
             return "/cards/" + store.currentCategory.name + "/" + this.card.image;
         },
 
+        tipsPlayed() {
+            return store.game.tipsPlayed;
+        },
+
         opened() {
             return store.game.opened;
         }
     },
 
-    watch: {
-        card(newCard) {
-            this.tipsPlayed = {}
-        }
-    },
-
     methods: {
         playTip(tip) {
-            if (store.game.audio) {
-                store.game.audio.pause();
-                store.game.audio = false;
-            }
-
-            const Card = this;
-            const audioFile = "/cards/" + store.currentCategory.name + "/" + tip;
-
-            store.game.audio = playAudio(audioFile);
-            store.game.audio.onended = function () {
-                store.game.audio = false;
-                Card.tipsPlayed[tip] = true;
-            };
+            return store.playTip(tip);
         },
 
         openCard() {
