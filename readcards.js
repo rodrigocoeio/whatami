@@ -145,7 +145,7 @@ const getCard = (content, parent) => {
         ? "cover"
         : "card";
     const cardImage = content.fileName;
-    const cardAudio = findCardFile(content.name, parent, "mp3");
+    const cardAudio = findCardFile(content.name, parent, "mp3") || findCardFile(content.name, parent, "mpeg");
     const cardTips = getCardTips(content, parent);
 
     return {
