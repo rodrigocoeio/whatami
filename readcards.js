@@ -151,7 +151,7 @@ const getCard = (content, parent) => {
     return {
       type: cardType,
       name: cardName,
-      category: parent.name,
+      category: parent ? parent.name : '',
       parent: content.parent,
       image: cardImage,
       audio: cardAudio,
@@ -180,7 +180,7 @@ const getCardTips = (content, parent) => {
 const findCardFile = (name, parent, extension) => {
   let file = false;
 
-  if (parent.contents)
+  if (parent && parent.contents)
     parent.contents.forEach((content) => {
       if (content.name === name && content.extension === extension)
         file = content;
