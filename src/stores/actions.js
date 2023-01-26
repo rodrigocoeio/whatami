@@ -69,6 +69,9 @@ export default {
       this.game.audio = false;
     }
 
+    if(!this.card.tips.includes(tip))
+      return false;
+
     const store = this;
     const audioFile = "/cards/" + this.currentCategory.name + "/" + tip;
 

@@ -2,6 +2,16 @@ import store from "$/store";
 
 const listenKeyBoardEvents = function (e) {
   if (store.game.started) {
+    // Play tip
+    if((e.keyCode>=49 && e.keyCode<=57) || (e.keyCode>=97 && e.keyCode<=105)){
+      const tipNumber = parseInt(e.key) -1;
+      const tip = store.card.tips[tipNumber];
+
+      if(tip){
+        store.playTip(tip);
+      }
+    }
+
     // Open Guess Where box on space
     if (e.keyCode == 32) {
       store.playNextTip();
