@@ -27,7 +27,7 @@ export default {
         },
 
         cardImage() {
-            return "/cards/" + store.currentCategory.name + "/" + this.card.image;
+            return "/cards/" + this.card.parent + "/" + this.card.image;
         },
 
         tipsPlayed() {

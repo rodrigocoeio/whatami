@@ -73,7 +73,7 @@ export default {
       return false;
 
     const store = this;
-    const audioFile = "/cards/" + this.currentCategory.name + "/" + tip;
+    const audioFile = "/cards/" + this.card.parent + "/" + tip;
 
     this.game.audio = playAudio(audioFile);
     this.game.audio.onended = function () {
@@ -114,7 +114,7 @@ export default {
 
     const store = this;
     const audioFile =
-      "/cards/" + this.currentCategory.name + "/" + this.card.audio;
+      "/cards/" + this.card.parent + "/" + this.card.audio;
 
     this.game.audio = playAudio(audioFile);
     this.game.audio.onended = function () {
