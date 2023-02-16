@@ -1,6 +1,6 @@
 <template>
   <main>
-    <img src="images/whatami.png" class="Logo">
+    <img src="/images/whatami.png" class="Logo">
 
     <br><br>
 
