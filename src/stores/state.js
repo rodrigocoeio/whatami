@@ -7,12 +7,13 @@ export default {
     cardIndex: 0,
     opened: false,
     cardSorting: "alpha",
-    tipsPlayed: {}
+    tipsPlayed: {},
+    pleaseSelectCategory: false,
   },
 
   configs: {
-    sound: true
+    sound: true,
   },
 
-  categories
+  categories,
 };

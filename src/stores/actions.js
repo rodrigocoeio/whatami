@@ -5,8 +5,7 @@ export default {
       !this.currentCategory.cards ||
       this.currentCategory.cards.length === 0
     ) {
-      alert("Choose a Category or Subcategory");
-      $("#categoryField").trigger("focus");
+      this.game.pleaseSelectCategory = true;
       return false;
     }
 
@@ -14,39 +13,45 @@ export default {
     this.game.opened = false;
     this.game.cardIndex = 0;
     this.game.tipsPlayed = {};
+    this.game.category.cards = this.shuffleCards(this.game.category.cards);
 
     playAudio("/audios/whatami.mp3");
   },
 
   quitGame() {
     this.game.started = false;
-    this.game.category = false;
   },
 
   async loadCategories() {
     try {
-      const categoriesJson = await fetch('/categories.json');
+      const categoriesJson = await fetch("/categories.json");
       this.categories = await categoriesJson.json();
-    }
-    catch(e) {
+    } catch (e) {
       //console.error('Failed loading categories.json!');
-    }    
+    }
   },
 
   selectCategory(category) {
     if (category && category.cards) {
-      switch (this.game.cardSorting) {
-        case "alpha":
-          category.cards = sortByKey(category.cards, "name", "asc");
-          break;
-
-        case "shuffle":
-          category.cards = shuffleArray(category.cards);
-          break;
-      }
+      category.cards = this.shuffleCards(category.cards);
 
       this.game.category = category;
+      this.game.pleaseSelectCategory = false;
     }
+  },
+
+  shuffleCards(cards) {
+    switch (this.game.cardSorting) {
+      case "alpha":
+        cards = sortByKey(cards, "name", "asc");
+        break;
+
+      case "shuffle":
+        cards = shuffleArray(cards);
+        break;
+    }
+
+    return cards;
   },
 
   nextCard() {
@@ -79,8 +84,7 @@ export default {
       this.game.audio = false;
     }
 
-    if(!this.card.tips.includes(tip))
-      return false;
+    if (!this.card.tips.includes(tip)) return false;
 
     const store = this;
     const audioFile = "/cards/" + this.card.parent + "/" + tip;
@@ -123,8 +127,7 @@ export default {
     if (!this.card.audio) return false;
 
     const store = this;
-    const audioFile =
-      "/cards/" + this.card.parent + "/" + this.card.audio;
+    const audioFile = "/cards/" + this.card.parent + "/" + this.card.audio;
 
     this.game.audio = playAudio(audioFile);
     this.game.audio.onended = function () {

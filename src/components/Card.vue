@@ -8,7 +8,7 @@
 
         <hr>
 
-        <img src="/images/whatami-cover.png" class="CardCover" @click="openCard" v-if="!opened">
+        <img src="/images/whatami.png" class="CardCover" @click="openCard" v-if="!opened">
 
         <div class="Card" v-if="opened" @click="playCard">
             <h1>{{ card.name }}</h1>
@@ -67,6 +67,7 @@ export default {
 
 .CardCover {
     cursor: pointer;
+    max-height: 400px;
 }
 
 .CardImage {
