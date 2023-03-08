@@ -148,6 +148,10 @@ button {
     margin-left: 15px;
 }
 
+button * {
+    vertical-align: middle;
+}
+
 button:not([disabled]):hover {
     background-color: chartreuse;
     text-shadow: white 3px 0 10px;
