@@ -92,7 +92,6 @@ export default {
 
 .CardCover {
     cursor: pointer;
-    max-height: 400px;
     border: 3px dashed black;
     border-radius: 30px;
     box-sizing: border-box;
