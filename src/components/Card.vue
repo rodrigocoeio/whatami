@@ -96,6 +96,7 @@ export default {
     border-radius: 30px;
     box-sizing: border-box;
     overflow: hidden;
+    height: calc(100% - 70px);
 }
 
 .CardImage {
@@ -118,7 +119,7 @@ export default {
 
 .TipButton {
     padding: 8px;
-    font-size: 14px;
+    font-size: 24px;
     border-radius: 15px;
     cursor: pointer;
     margin-left: 15px;
