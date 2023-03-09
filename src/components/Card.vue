@@ -16,7 +16,7 @@
         <img src="/images/whatami.png" class="CardCover" @click="openCard" v-if="!opened">
 
         <div class="Card" v-if="opened" @click="playCard">
-            <h1>I'm {{ card.name }}</h1>
+            <h1>{{ card.name }}</h1>
             <img :src="cardImage" class="CardImage">
         </div>
     </div>
