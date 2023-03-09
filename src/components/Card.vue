@@ -78,11 +78,11 @@ export default {
 
 .Card h1 {
     position: relative;
-    text-shadow: gray 3px 1px 1px;
-    -webkit-text-stroke: 1px white;
+    text-shadow: gray 5px 1px 1px;
+    -webkit-text-stroke: 1px black;
     background-color: white;
     margin-top: 0px;
-    font-size: 36px;
+    font-size: 48px;
     font-weight: bold;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: black;
