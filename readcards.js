@@ -75,6 +75,11 @@ const readFolder = async function (folder, parent) {
 };
 
 const readCategories = async function (folder, callback) {
+  if (!fs.existsSync(folder)) {
+    console.log(folder + " doesn't exists!");
+    return false;
+  }
+
   const contents = await readFolder(folder);
 
   const categoriesCards = readContents(contents);
@@ -145,13 +150,15 @@ const getCard = (content, parent) => {
         ? "cover"
         : "card";
     const cardImage = content.fileName;
-    const cardAudio = findCardFile(content.name, parent, "mp3") || findCardFile(content.name, parent, "mpeg");
+    const cardAudio =
+      findCardFile(content.name, parent, "mp3") ||
+      findCardFile(content.name, parent, "mpeg");
     const cardTips = getCardTips(content, parent);
 
     return {
       type: cardType,
       name: cardName,
-      category: parent ? parent.name : '',
+      category: parent ? parent.name : "",
       parent: content.parent,
       image: cardImage,
       audio: cardAudio,
@@ -189,8 +196,8 @@ const findCardFile = (name, parent, extension) => {
   return file.fileName;
 };
 
-const categoriesFolder = "./public/cards";
-const categoriesJsonPath = "./src/stores/categories.json";
+const categoriesFolder = process.argv[2] ? process.argv[2] : "./cards";
+const categoriesJsonPath = categoriesFolder + "/categories.json";
 
 console.log("reading categories and cards...");
 
