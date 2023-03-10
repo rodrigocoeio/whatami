@@ -71,8 +71,7 @@ main {
 }
 
 h1 {
-  text-shadow: gray 3px 1px 1px;
-  -webkit-text-stroke: 1px white;
+  text-shadow: gray 2px 1px 1px;
   margin-top: 0px;
   margin-bottom: 15px;
   font-size: 48px;

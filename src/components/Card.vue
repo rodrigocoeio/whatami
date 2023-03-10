@@ -78,7 +78,7 @@ export default {
 
 .Card h1 {
     position: relative;
-    text-shadow: gray 5px 1px 1px;
+    text-shadow: gray 1px 1px 1px;
     -webkit-text-stroke: 1px black;
     background-color: white;
     margin-top: 0px;
